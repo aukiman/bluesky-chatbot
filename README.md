@@ -20,7 +20,7 @@ Uses the **Bluesky API (AT Protocol)** for input/output and **OpenAI** for gener
 ## 🚀 One-liner Install
 
 ```copy
-sudo bash -c "$(curl -fsSL https://raw.githubusercontent.com/aukiman/bluesky-chatbot/main/install.sh)"
+curl -fsSL https://raw.githubusercontent.com/aukiman/bluesky-chatbot/main/install.sh | sudo bash
 ```
 
 This installer will:
