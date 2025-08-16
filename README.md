@@ -17,7 +17,7 @@ Uses the **Bluesky API (AT Protocol)** for input/output and **OpenAI** for gener
 
 ---
 
-## 🚀 One-liner Install (after pushing to GitHub)
+## 🚀 One-liner Install
 
 ```copy
 sudo bash -c "$(curl -fsSL https://raw.githubusercontent.com/aukiman/bluesky-chatbot/main/install.sh)"
