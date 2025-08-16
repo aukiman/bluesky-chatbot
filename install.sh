@@ -1,4 +1,3 @@
-cat > install.sh <<'EOF'
 #!/usr/bin/env bash
 set -euo pipefail
 
@@ -116,78 +115,4 @@ fi
 # Systemd services (fallback create if missing)
 echo "[*] Installing systemd services..."
 install_service() {
-  local src="$1" dst="$2" fallback="$3"
-  if [[ -f "$src" ]]; then
-    cp "$src" "$dst"
-  else
-    echo "[!] $src not found; writing fallback $dst"
-    cat >"$dst" <<EOF_UNIT
-$fallback
-EOF_UNIT
-  fi
-}
-
-install_service "systemd/bsky-bots.service" "/etc/systemd/system/bsky-bots.service" "[Unit]
-Description=Bluesky Bots (multi-bot runner)
-After=network-online.target
-[Service]
-Type=simple
-User=bskybots
-Group=bskybots
-EnvironmentFile=/etc/bsky-bots.env
-WorkingDirectory=/opt/bsky-bots
-ExecStart=/opt/bsky-bots/.venv/bin/python /opt/bsky-bots/bsky-bots.py --config /etc/bsky-bots/bots.yaml --global-config /etc/bsky-bots/global.yaml
-Restart=always
-RestartSec=5
-StandardOutput=append:/var/log/bsky-bots/service.log
-StandardError=append:/var/log/bsky-bots/service.err
-[Install]
-WantedBy=multi-user.target"
-
-install_service "systemd/bsky-bots-ui.service" "/etc/systemd/system/bsky-bots-ui.service" "[Unit]
-Description=Bluesky Bots UI (approval dashboard)
-After=network-online.target
-[Service]
-Type=simple
-User=bskybots
-Group=bskybots
-EnvironmentFile=/etc/bsky-bots.env
-WorkingDirectory=/opt/bsky-bots
-ExecStart=/opt/bsky-bots/.venv/bin/python /opt/bsky-bots/bsky-bots-ui.py
-Restart=always
-RestartSec=5
-StandardOutput=append:/var/log/bsky-bots/ui.log
-StandardError=append:/var/log/bsky-bots/ui.err
-[Install]
-WantedBy=multi-user.target"
-
-install_service "systemd/bsky-firehose.service" "/etc/systemd/system/bsky-firehose.service" "[Unit]
-Description=Bluesky Firehose Listener
-After=network-online.target
-[Service]
-Type=simple
-User=bskybots
-Group=bskybots
-EnvironmentFile=/etc/bsky-bots.env
-WorkingDirectory=/opt/bsky-bots
-ExecStart=/opt/bsky-bots/.venv/bin/python /opt/bsky-bots/bsky-firehose.py
-Restart=always
-RestartSec=5
-StandardOutput=append:/var/log/bsky-bots/firehose.log
-StandardError=append:/var/log/bsky-bots/firehose.err
-[Install]
-WantedBy=multi-user.target"
-
-systemctl daemon-reload
-systemctl enable bsky-bots.service || true
-[[ -f /etc/systemd/system/bsky-bots-ui.service ]] && systemctl enable bsky-bots-ui.service || true
-[[ -f /etc/systemd/system/bsky-firehose.service ]] && systemctl enable bsky-firehose.service || true
-
-echo "[*] Installation complete."
-echo "Edit /etc/bsky-bots/bots.yaml and /etc/bsky-bots.env, then start with:"
-echo "  sudo systemctl start bsky-bots"
-echo "  sudo systemctl start bsky-bots-ui   # if present"
-echo "  sudo systemctl start bsky-firehose  # if present"
-EOF
-
-chmod +x install.sh
+  local src="$1" dst="$2" fallback="
