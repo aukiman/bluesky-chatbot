@@ -1,0 +1,18 @@
+[Unit]
+Description=Bluesky Bots UI (approval dashboard)
+After=network-online.target
+
+[Service]
+Type=simple
+User=bskybots
+Group=bskybots
+EnvironmentFile=/etc/bsky-bots.env
+WorkingDirectory=/opt/bsky-bots
+ExecStart=/opt/bsky-bots/.venv/bin/python /opt/bsky-bots/bsky-bots-ui.py
+Restart=always
+RestartSec=5
+StandardOutput=append:/var/log/bsky-bots/ui.log
+StandardError=append:/var/log/bsky-bots/ui.err
+
+[Install]
+WantedBy=multi-user.target

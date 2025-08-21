@@ -1,0 +1,8 @@
+# /etc/bsky-bots/global.yaml
+openai:
+  model: "gpt-4o-mini"
+  temperature: 0.7
+loop_sleep_seconds: 20
+approval_mode: false        # default for all bots unless overridden
+enable_firehose: true       # start optional firehose service
+ui_port: 9876               # FastAPI UI port (localhost only)

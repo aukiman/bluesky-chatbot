@@ -1,0 +1,23 @@
+[Unit]
+Description=Bluesky Bots (multi-bot runner)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=bskybots
+Group=bskybots
+EnvironmentFile=-/etc/bsky-bots.env
+WorkingDirectory=/opt/bsky-bots
+ExecStart=/opt/bsky-bots/.venv/bin/python /opt/bsky-bots/bsky-bots.py \
+  --config /etc/bsky-bots/bots.yaml --global-config /etc/bsky-bots/global.yaml
+Restart=always
+RestartSec=10
+NoNewPrivileges=true
+ProtectSystem=full
+ProtectHome=true
+PrivateTmp=true
+CapabilityBoundingSet=
+LockPersonality=true
+
+[Install]
+WantedBy=multi-user.target

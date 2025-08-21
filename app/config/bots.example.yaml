@@ -1,0 +1,49 @@
+# /etc/bsky-bots/bots.yaml
+bots:
+  - handle: "yourbot1.bsky.social"
+    app_password: "xxxx-xxxx-xxxx-xxxx"
+    nsfw_allowed: false
+    approval_mode: true     # override per-bot (optional; otherwise inherit global)
+    persona:
+      tone: "warm"          # warm | professional | edgy
+      emoji_density: 1      # 0..3
+      formality: 1          # 0=casual, 1=neutral, 2=formal
+      humour: 1             # 0..3
+    allow:
+      users: []
+      phrases: []
+      hashtags: []
+    block:
+      users: ["spam_account.bsky.social"]
+      phrases: ["giveaway", "promocode"]
+      hashtags: ["ad", "promo"]
+    rate_limit:
+      max_per_minute: 8
+      max_per_hour: 80
+    reply_rules:
+      allow_unprompted: false
+      keywords: ["music","your brand","Elevator Primates"]
+
+  - handle: "yourbot2.bsky.social"
+    app_password: "xxxx-xxxx-xxxx-xxxx"
+    nsfw_allowed: true
+    approval_mode: false
+    persona:
+      tone: "edgy"
+      emoji_density: 2
+      formality: 0
+      humour: 2
+    allow:
+      users: []
+      phrases: []
+      hashtags: []
+    block:
+      users: []
+      phrases: []
+      hashtags: []
+    rate_limit:
+      max_per_minute: 5
+      max_per_hour: 50
+    reply_rules:
+      allow_unprompted: true
+      keywords: ["ai art","australia","punk rock"]

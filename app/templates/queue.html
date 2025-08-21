@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Bluesky Bots Queue</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header>
+    <h1>Pending Replies</h1>
+  </header>
+  <main>
+    {% if items %}
+    <table>
+      <thead><tr><th>ID</th><th>Time</th><th>Bot</th><th>Author</th><th>Source</th><th>Post</th><th>LLM Reply</th><th>Actions</th></tr></thead>
+      <tbody>
+        {% for i in items %}
+        <tr>
+          <td>{{ i.id }}</td>
+          <td>{{ i.ts }}</td>
+          <td>{{ i.bot_handle }}</td>
+          <td>@{{ i.author_handle }}</td>
+          <td>{{ i.source }}</td>
+          <td class="pre">{{ i.post_text }}</td>
+          <td class="pre">{{ i.llm_reply }}</td>
+          <td>
+            <form method="post" action="/api/approve" style="display:inline">
+              <input type="hidden" name="item_id" value="{{ i.id }}"/>
+              <button>Approve & Post</button>
+            </form>
+            <form method="post" action="/api/reject" style="display:inline">
+              <input type="hidden" name="item_id" value="{{ i.id }}"/>
+              <button class="danger">Reject</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p>No pending items.</p>
+    {% endif %}
+    <hr/>
+    <h2>Per-bot Approval Mode</h2>
+    <form method="post" action="/api/toggle-approval">
+      <label>Bot handle:</label>
+      <input name="handle" placeholder="yourbot.bsky.social"/>
+      <select name="mode">
+        <option value="on">ON</option>
+        <option value="off">OFF</option>
+      </select>
+      <button>Toggle</button>
+    </form>
+  </main>
+</body>
+</html>

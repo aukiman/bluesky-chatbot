@@ -1,0 +1,18 @@
+[Unit]
+Description=Bluesky Bots (multi-bot runner)
+After=network-online.target
+
+[Service]
+Type=simple
+User=bskybots
+Group=bskybots
+EnvironmentFile=/etc/bsky-bots.env
+WorkingDirectory=/opt/bsky-bots
+ExecStart=/opt/bsky-bots/.venv/bin/python /opt/bsky-bots/bsky-bots.py --config /etc/bsky-bots/bots.yaml --global-config /etc/bsky-bots/global.yaml
+Restart=always
+RestartSec=5
+StandardOutput=append:/var/log/bsky-bots/service.log
+StandardError=append:/var/log/bsky-bots/service.err
+
+[Install]
+WantedBy=multi-user.target

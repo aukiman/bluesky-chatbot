@@ -1,0 +1,11 @@
+bots:
+  - handle: "yourbot.bsky.social"
+    # identifier: "you@example.com"   # optional (email or handle)
+    app_password: "xxxx-xxxx-xxxx-xxxx" # set after install
+    nsfw_allowed: false
+    approval_mode: false
+    persona: { tone: "warm", emoji_density: 1, formality: 1, humour: 1 }
+    allow: { users: [], phrases: [], hashtags: [] }
+    block: { users: [], phrases: [], hashtags: [] }
+    rate_limit: { max_per_minute: 4, max_per_hour: 60 }
+    reply_rules: { allow_unprompted: false, keywords: [] }

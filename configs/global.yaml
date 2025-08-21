@@ -1,0 +1,6 @@
+# Global defaults
+loop_sleep_seconds: 25
+llm_rate_limit_per_minute: 12
+openai:
+  model: gpt-4o-mini
+  temperature: 0.7
